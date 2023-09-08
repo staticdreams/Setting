@@ -21,6 +21,7 @@ public struct SettingPicker: View, Setting {
     public var horizontalSpacing = CGFloat(12)
     public var verticalPadding = CGFloat(14)
     public var horizontalPadding: CGFloat?
+    public var pickerScaleFactor: CGFloat = 1.0
     public var choicesConfiguration = ChoicesConfiguration()
 
     public init(
@@ -33,6 +34,7 @@ public struct SettingPicker: View, Setting {
         horizontalSpacing: CGFloat = CGFloat(12),
         verticalPadding: CGFloat = CGFloat(14),
         horizontalPadding: CGFloat? = nil,
+        pickerScaleFactor: CGFloat  = 1.0,
         choicesConfiguration: ChoicesConfiguration = ChoicesConfiguration()
     ) {
         self.id = id
@@ -44,6 +46,7 @@ public struct SettingPicker: View, Setting {
         self.horizontalSpacing = horizontalSpacing
         self.verticalPadding = verticalPadding
         self.horizontalPadding = horizontalPadding
+        self.pickerScaleFactor = pickerScaleFactor
         self.choicesConfiguration = choicesConfiguration
     }
 
@@ -106,6 +109,7 @@ public struct SettingPicker: View, Setting {
             horizontalSpacing: horizontalSpacing,
             verticalPadding: verticalPadding,
             horizontalPadding: horizontalPadding,
+            pickerScaleFactor: pickerScaleFactor,
             choicesConfiguration: choicesConfiguration
         )
     }
@@ -132,6 +136,7 @@ struct SettingPickerView: View {
     var horizontalSpacing = CGFloat(12)
     var verticalPadding = CGFloat(14)
     var horizontalPadding: CGFloat? = nil
+    var pickerScaleFactor: CGFloat = 1.0
     var choicesConfiguration = SettingPicker.ChoicesConfiguration()
 
     @State var isActive = false
@@ -157,6 +162,7 @@ struct SettingPickerView: View {
 
                         Text(selectedChoice)
                             .foregroundColor(foregroundColor ?? settingSecondaryColor)
+                            .scaleEffect(pickerScaleFactor)
                     }
 
                     Image(systemName: "chevron.forward")
@@ -193,6 +199,7 @@ struct SettingPickerView: View {
                     }
                 }
                 .pickerStyle(.menu)
+                .scaleEffect(pickerScaleFactor)
                 #if os(iOS)
                     .padding(.trailing, -edgePadding + 2)
                 #else
@@ -211,6 +218,7 @@ struct SettingPickerView: View {
                         Text(choice)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.vertical, choicesConfiguration.verticalPadding)
+                            .scaleEffect(pickerScaleFactor)
 
                         if index == selectedIndex {
                             Image(systemName: "checkmark")
