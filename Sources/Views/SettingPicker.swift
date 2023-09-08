@@ -194,6 +194,12 @@ struct SettingPickerView: View {
                     .padding(.vertical, verticalPadding)
 
                 Picker("", selection: $selectedIndex) {
+                    if let headerText =  choicesConfiguration.groupHeader {
+                        Label(
+                            title: { Text(headerText) },
+                            icon: { Image(systemName: "exclamationmark.triangle") }
+                        ).disabled(true)
+                    }
                     ForEach(Array(zip(choices.indices, choices)), id: \.1) { index, choice in
                         Text(choice).tag(index)
                     }
