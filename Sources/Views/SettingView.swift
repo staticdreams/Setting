@@ -85,7 +85,9 @@ public struct SettingView: View {
                 backgroundCornerRadius: group.backgroundCornerRadius,
                 dividerLeadingMargin: group.dividerLeadingMargin,
                 dividerTrailingMargin: group.dividerTrailingMargin,
-                dividerColor: group.dividerColor
+                dividerColor: group.dividerColor,
+                headerFontSize: group.headerFontSize,
+                footerFontSize: group.footerFontSize
             ) {
                 ForEach(group.tuple.settings, id: \.identifier) { setting in
                     SettingView(setting: setting)

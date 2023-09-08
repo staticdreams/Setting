@@ -22,7 +22,7 @@ struct ControlPanelView: View {
                     controls
                 }
 
-                SettingGroup(header: "Volume") {
+                SettingGroup(header: "Volume", headerFontSize: 12) {
                     SettingSlider(
                         value: $volume,
                         range: 0 ... 10,
@@ -62,7 +62,7 @@ struct ControlPanelView: View {
                     }
                 }
 
-                SettingGroup {
+                SettingGroup(headerFontSize: 17) {
                     SettingToggle(title: "Airplane Mode", isOn: a)
                     SettingToggle(title: "Wi-Fi", isOn: w)
                     SettingToggle(title: "Bluetooth", isOn: b)

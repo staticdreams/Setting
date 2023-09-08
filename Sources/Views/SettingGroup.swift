@@ -22,6 +22,8 @@ public struct SettingGroup: Setting {
     public var dividerLeadingMargin = CGFloat(16)
     public var dividerTrailingMargin = CGFloat(0)
     public var dividerColor: Color?
+    public var headerFontSize: CGFloat?
+    public var footerFontSize: CGFloat?
     @SettingBuilder public var tuple: SettingTupleView
 
     public init(
@@ -35,6 +37,8 @@ public struct SettingGroup: Setting {
         dividerLeadingMargin: CGFloat = CGFloat(16),
         dividerTrailingMargin: CGFloat = CGFloat(0),
         dividerColor: Color? = nil,
+        headerFontSize: CGFloat? = nil,
+        footerFontSize: CGFloat? = nil,
         @SettingBuilder tuple: () -> SettingTupleView
     ) {
         self.id = id
@@ -47,6 +51,8 @@ public struct SettingGroup: Setting {
         self.dividerLeadingMargin = dividerLeadingMargin
         self.dividerTrailingMargin = dividerTrailingMargin
         self.dividerColor = dividerColor
+        self.headerFontSize = headerFontSize
+        self.footerFontSize = headerFontSize
         self.tuple = tuple()
     }
 }
@@ -67,7 +73,10 @@ public struct SettingGroupView<Content: View>: View {
     public var dividerLeadingMargin = CGFloat(16)
     public var dividerTrailingMargin = CGFloat(0)
     public var dividerColor: Color?
+    public var headerFontSize: CGFloat?
+    public var footerFontSize: CGFloat?
     @ViewBuilder public var content: () -> Content
+    
 
     public init(
         icon: SettingIcon? = nil,
@@ -81,7 +90,10 @@ public struct SettingGroupView<Content: View>: View {
         dividerLeadingMargin: CGFloat = CGFloat(16),
         dividerTrailingMargin: CGFloat = CGFloat(0),
         dividerColor: Color? = nil,
+        headerFontSize: CGFloat? = nil,
+        footerFontSize: CGFloat? = nil,
         @ViewBuilder content: @escaping () -> Content
+        
     ) {
         self.icon = icon
         self.header = header
@@ -94,6 +106,8 @@ public struct SettingGroupView<Content: View>: View {
         self.dividerLeadingMargin = dividerLeadingMargin
         self.dividerTrailingMargin = dividerTrailingMargin
         self.dividerColor = dividerColor
+        self.headerFontSize = headerFontSize
+        self.footerFontSize = headerFontSize
         self.content = content
     }
 
@@ -105,11 +119,10 @@ public struct SettingGroupView<Content: View>: View {
                         SettingIconView(icon: icon)
                             .scaleEffect(0.6)
                     }
-
                     if let header {
                         Text(header)
                             .textCase(.uppercase)
-                            .font(.system(.subheadline))
+                            .font(headerFontSize != nil ? .system(size: headerFontSize ?? 16) : .system(.subheadline))
                             .foregroundColor(foregroundColor ?? settingSecondaryColor)
                     }
                 }
@@ -140,7 +153,7 @@ public struct SettingGroupView<Content: View>: View {
                 }
                 .fixedSize(horizontal: false, vertical: true)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .font(.system(.subheadline))
+                .font(footerFontSize != nil ? .system(size: footerFontSize ?? 16) : .system(.subheadline))
                 .foregroundColor(foregroundColor ?? settingSecondaryColor)
                 .padding(.horizontal, backgroundCornerRadius)
                 .padding(.top, 8)
