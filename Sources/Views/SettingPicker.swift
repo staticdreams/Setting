@@ -163,6 +163,7 @@ struct SettingPickerView: View {
                         Text(selectedChoice)
                             .foregroundColor(foregroundColor ?? settingSecondaryColor)
                             .scaleEffect(pickerScaleFactor)
+                            .frame(minWidth: 200, alignment: .trailing)
                     }
 
                     Image(systemName: "chevron.forward")
@@ -206,6 +207,7 @@ struct SettingPickerView: View {
                 }
                 .pickerStyle(.menu)
                 .scaleEffect(pickerScaleFactor)
+                .frame(minWidth: 220, alignment: .trailing)
                 #if os(iOS)
                     .padding(.trailing, -edgePadding + 2)
                 #else
